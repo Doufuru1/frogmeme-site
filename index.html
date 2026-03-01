@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrogMeme - Landing Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #FFFFFF;
+            --color-text: #000000;
+            --color-text-secondary: #828282;
+            --color-border: #E6E6E6;
+            --color-button-bg: #000000;
+            --color-button-text: #FFFFFF;
+            --color-button-secondary-bg: #E6E6E6;
+            --color-section-bg: #F7F7F7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-logo {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.7;
+        }
+
+        .nav-cta {
+            background: var(--color-button-bg);
+            color: var(--color-button-text);
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 80px 80px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            max-width: 844px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            letter-spacing: -1.28px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--color-text);
+            opacity: 0.75;
+            margin-bottom: 40px;
+            max-width: 700px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 20px 32px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-button-bg);
+            color: var(--color-button-text);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-secondary {
+            background: var(--color-button-secondary-bg);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: #D9D9D9;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 48px;
+            letter-spacing: -0.96px;
+        }
+
+        /* Content Block */
+        .content-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .content-block.reverse {
+            direction: rtl;
+        }
+
+        .content-block.reverse > * {
+            direction: ltr;
+        }
+
+        .content-text h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .content-text p {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .content-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #F0F0F0 0%, #E0E0E0 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        /* Feature List */
+        .feature-section {
+            background: var(--color-section-bg);
+            padding: 80px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 48px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 16px;
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: #444;
+            border-radius: 8px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .feature-content h3 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .feature-content p {
+            font-size: 20px;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Cards Section */
+        .cards-section {
+            padding: 80px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .card {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            background: white;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 405px;
+            background: linear-gradient(135deg, #F5F5F5 0%, #EBEBEB 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card-content h3 {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .card-content p {
+            font-size: 24px;
+            color: var(--color-text-secondary);
+        }
+
+        /* Testimonials */
+        .testimonials-section {
+            padding: 80px;
+            background: var(--color-section-bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .testimonial-text {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 48px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #D9D9D9;
+            overflow: hidden;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .author-info p {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--color-section-bg);
+            padding: 80px;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 32px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+        }
+
+        .btn-large {
+            padding: 20px 32px;
+            font-size: 24px;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 64px 80px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #828282;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: #F0F0F0;
+            color: #000;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 16px;
+        }
+
+        .footer-column a {
+            color: #444;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #000;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero {
+                padding: 100px 40px 60px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .section {
+                padding: 60px 40px;
+            }
+
+            .content-block {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cards-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 16px 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+
+            .section-heading {
+                font-size: 32px;
+            }
+
+            .content-text h2 {
+                font-size: 28px;
+            }
+
+            .content-text p {
+                font-size: 18px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-content h2 {
+                font-size: 32px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-large {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            footer {
+                padding: 40px 20px;
+            }
+        }
+
+        /* Image Placeholder Styling */
+        .img-placeholder {
+            background: linear-gradient(135deg, #F5F5F5 0%, #EBEBEB 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-logo">Site name</div>
+        <div class="nav-links">
+            <a href="#" class="nav-link">Page</a>
+            <a href="#" class="nav-link">Page</a>
+            <a href="#" class="nav-link">Page</a>
+            <a href="#" class="nav-cta">Button</a>
+        </div>
+        <button class="mobile-menu-btn">☰</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Landing page title</h1>
+            <p>Subheading that sets up context, shares more info about the website, or generally gets people psyched to keep scrolling.</p>
+            <a href="#" class="btn btn-primary">Button</a>
+        </div>
+    </section>
+
+    <!-- Content Block 1 -->
+    <section class="section">
+        <div class="content-block">
+            <div class="content-text">
+                <h2>Heading</h2>
+                <p>A subheading for this section, as long or as short as you like</p>
+                <div class="button-group">
+                    <a href="#" class="btn btn-primary">Button</a>
+                    <a href="#" class="btn btn-secondary">Secondary button</a>
+                </div>
+            </div>
+            <div class="content-image img-placeholder">
+                <img src="./images/image1.jpg" alt="Feature image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Block 2 -->
+    <section class="section">
+        <div class="content-block reverse">
+            <div class="content-text">
+                <h2>Heading</h2>
+                <p>A subheading for this section, as long or as short as you like</p>
+                <div class="button-group">
+                    <a href="#" class="btn btn-primary">Button</a>
+                    <a href="#" class="btn btn-secondary">Secondary button</a>
+                </div>
+            </div>
+            <div class="content-image img-placeholder">
+                <img src="./images/image2.jpg" alt="Feature image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Section -->
+    <section class="feature-section">
+        <h2 class="section-heading" style="max-width: 1440px; margin: 0 auto 48px; padding: 0 80px;">Section heading</h2>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🌐</div>
+                <div class="feature-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🔒</div>
+                <div class="feature-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to claim. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">👤</div>
+                <div class="feature-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to suggest. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">📅</div>
+                <div class="feature-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to type. Add main takeaway points, quotes, anecdotes, or even a very very short story.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="cards-section">
+        <h2 class="section-heading">Section heading</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-image img-placeholder">
+                    <img src="./images/card1.jpg" alt="Card image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+                </div>
+                <div class="card-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to add more to the subheading.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image img-placeholder">
+                    <img src="./images/card2.jpg" alt="Card image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+                </div>
+                <div class="card-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to expand on the main point.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image img-placeholder">
+                    <img src="./images/card3.jpg" alt="Card image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+                </div>
+                <div class="card-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to share more.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content with Image -->
+    <section class="section">
+        <h2 class="section-heading">Section heading</h2>
+        <div class="content-image img-placeholder" style="height: 640px; margin-bottom: 80px;">
+            <img src="./images/hero-image.jpg" alt="Hero image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Hero Image';">
+        </div>
+        
+        <div class="content-block" style="margin-bottom: 0;">
+            <div class="content-text">
+                <div class="feature-item" style="margin-bottom: 48px;">
+                    <div class="feature-content">
+                        <h3>Subheading</h3>
+                        <p>Body text for whatever you'd like to expand on the main point.</p>
+                    </div>
+                </div>
+                <div class="feature-item" style="margin-bottom: 48px;">
+                    <div class="feature-content">
+                        <h3>Subheading</h3>
+                        <p>Body text for whatever you'd like to say. Add main takeaway points, quotes, anecdotes.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-content">
+                        <h3>Subheading</h3>
+                        <p>Body text for whatever you'd like to add more to the main point. It provides details, explanations, and context.</p>
+                    </div>
+                </div>
+                <div class="button-group" style="margin-top: 48px;">
+                    <a href="#" class="btn btn-primary">Button</a>
+                    <a href="#" class="btn btn-secondary">Secondary button</a>
+                </div>
+            </div>
+            <div class="content-image img-placeholder" style="height: 704px;">
+                <img src="./images/side-image.jpg" alt="Side image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+            </div>
+        </div>
+    </section>
+
+    <!-- Cards Section 2 -->
+    <section class="cards-section">
+        <h2 class="section-heading">Section heading</h2>
+        <div class="cards-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="card">
+                <div class="card-image img-placeholder" style="height: 341px;">
+                    <img src="./images/card4.jpg" alt="Card image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+                </div>
+                <div class="card-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to add more to the subheading.</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-image img-placeholder" style="height: 341px;">
+                    <img src="./images/card5.jpg" alt="Card image" onerror="this.style.display='none'; this.parentElement.innerHTML='🖼️ Image';">
+                </div>
+                <div class="card-content">
+                    <h3>Subheading</h3>
+                    <p>Body text for whatever you'd like to expand on the main point.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials-section">
+        <h2 class="section-heading" style="max-width: 1440px; margin: 0 auto 48px; padding: 0 80px;">Section heading</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"A terrific piece of praise"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="./images/avatar1.jpg" alt="Avatar" onerror="this.style.display='none'; this.parentElement.style.background='#D9D9D9';">
+                    </div>
+                    <div class="author-info">
+                        <h4>Name</h4>
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"A fantastic bit of feedback"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="./images/avatar2.jpg" alt="Avatar" onerror="this.style.display='none'; this.parentElement.style.background='#D9D9D9';">
+                    </div>
+                    <div class="author-info">
+                        <h4>Name</h4>
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"A genuinely glowing review"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">
+                        <img src="./images/avatar3.jpg" alt="Avatar" onerror="this.style.display='none'; this.parentElement.style.background='#D9D9D9';">
+                    </div>
+                    <div class="author-info">
+                        <h4>Name</h4>
+                        <p>Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Section heading</h2>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary btn-large">Button</a>
+                <a href="#" class="btn btn-secondary btn-large">Secondary button</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Site name</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">f</a>
+                    <a href="#" class="social-link">in</a>
+                    <a href="#" class="social-link">▶</a>
+                    <a href="#" class="social-link">📷</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Topic</h4>
+                <ul>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                    <li><a href="#">Page</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
